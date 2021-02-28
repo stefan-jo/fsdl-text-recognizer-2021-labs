@@ -50,33 +50,6 @@ class ResBlock(nn.Module):
         """
         return F.relu(self.pool(x) + self.convs(x))
 
-class ConvBlock(nn.Module):
-    """
-    Simple 3x3 conv with padding size 1 (to leave the input size unchanged), followed by a ReLU.
-    """
-
-    def __init__(self, input_channels: int, output_channels: int) -> None:
-        super().__init__()
-        self.conv = nn.Conv2d(input_channels, output_channels, kernel_size=3, stride=1, padding=1)
-        self.relu = nn.ReLU()
-
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """
-        Parameters
-        ----------
-        x
-            of dimensions (B, C, H, W)
-
-        Returns
-        -------
-        torch.Tensor
-            of dimensions (B, C, H, W)
-        """
-        c = self.conv(x)
-        r = self.relu(c)
-        return r
-
-
 
 class CNN(nn.Module):
     """Simple CNN for recognizing characters in a square image."""
